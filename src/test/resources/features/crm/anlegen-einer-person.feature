@@ -1,5 +1,6 @@
-Feature: Person Management
-  Scenario: Setzen des Alters einer Person
-    Given eine neue Person mit Name "Muster" und Vorname "Max"
-    When das Alter auf 30 gesetzt wird
-    Then sollte das Alter 30 sein
+Feature: Partner Management
+  Scenario: Anlage neuer Partner
+    Given neue Partner mit:
+      | partnerNr | vorname | name   | alter | geschlecht | strasse     | nr | plz   | ort         | land        | bezahlinformationen | korrespondenzsprache | iban             | kontoinhaber | email         | sozialversicherungsnummer |
+      | P12345    | Max     | Muster | 30    | männlich   | Hauptstraße | 12 | 12345 | Musterstadt | Deutschland | Kreditkarte         | Deutsch              | DE12345678901234 | Max Muster   | max@muster.de | 123456789                 |
+

@@ -2,7 +2,10 @@ package ch.over.limits.united.crm.persistence;
 
 import javax.persistence.Embeddable;
 
+import lombok.Builder;
+
 @Embeddable
+@Builder
 public class Adresse {
     private String strasse;
     private String nr;

@@ -2,11 +2,13 @@ package ch.over.limits.united.crm.persistence;
 
 import javax.persistence.*;
 
+import lombok.Builder;
+
 @Entity
+@Builder
 public class Partner{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
     private String partnerNr;
     private String vorname;
     private String name;
@@ -21,15 +23,6 @@ public class Partner{
     private String kontoinhaber;
     private String email;
     private String sozialversicherungsnummer;
-
-    // Getters und Setters
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getPartnerNr() {
         return partnerNr;
