@@ -1,12 +1,27 @@
 package ch.over.limits.united.rest;
 
+import java.util.List;
+
+import org.eclipse.microprofile.openapi.annotations.Operation;
+
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.enums.SchemaType;
+import org.eclipse.microprofile.openapi.annotations.media.Content;
+import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
+import org.eclipse.microprofile.openapi.annotations.responses.APIResponseSchema;
+
 import com.electronwill.nightconfig.core.conversion.Path;
 
 import ch.over.limits.united.crm.persistence.Adresse;
 import ch.over.limits.united.crm.persistence.Partner;
+import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
@@ -14,9 +29,9 @@ import jakarta.ws.rs.core.Response;
 import lombok.Builder;
 import lombok.Data;
 
-//@Path("/partner")
+@Stateless
+@Path("partner")
 public class PartnerResource {
-/*
     @PersistenceContext
     private EntityManager entityManager;
 
@@ -45,11 +60,19 @@ public class PartnerResource {
                 .sozialversicherungsnummer(dto.getSozialversicherungsnummer())
                 .build();
 
-        entityManager.persist(partner);            
+        entityManager.persist(partner);
         return Response.status(Response.Status.CREATED).entity(partner).build();
     }
 
-    */
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(summary = "List all partners", description = "Returns a list of all registered partners.")
+    @APIResponse(responseCode = "200", description = "Successfully retrieved the list")
+    @APIResponse(responseCode = "500", description = "Internal server error") 
+    public List<Partner> listPartner() {
+        return entityManager.createQuery("SELECT p FROM Partner p", Partner.class).getResultList();
+    }
+
     @Data
     @Builder
     public static class CreatePartnerDto {
